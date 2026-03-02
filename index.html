@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Your Personal Sanctuary</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body onclick="playMusicOnce()"> <audio id="bgMusic" loop>
+        <source src="img/sounds.mpeg" type="audio/mpeg">
+    </audio>
+
+    <canvas id="mainCanvas"></canvas>
+
+    <section id="home" class="active">
+        <div class="glass-card">
+            <div class="glow-point"></div>
+            <h1 class="title">Halo, Istirahat Yuk? ✨</h1>
+            <p class="subtitle">"Dunia mungkin sedang berisik, tapi di sini, semuanya tenang. Pilih ruang yang paling kamu butuhkan."</p>
+            <div class="menu-grid">
+                <button class="btn btn-cyan" onclick="showPage('garden')">🌸 Taman Bunga</button>
+                <button class="btn btn-blue" onclick="showPage('game')">🍎 Fruit Catcher</button>
+                <button class="btn btn-purple" onclick="showPage('zen')">✨ Zen Space</button>
+                <button class="btn btn-special" onclick="showPage('heart')">🐱 Pesan Kucing</button>
+            </div>
+            <p style="font-size: 0.6rem; margin-top: 15px; opacity: 0.5;">🎵 Musik otomatis terputar saat layar diketuk</p>
+        </div>
+    </section>
+
+    <section id="garden">
+        <button class="btn-back" onclick="showPage('home')">← Kembali</button>
+        <div id="garden-area" class="click-area"></div>
+        <div class="instruction">Ketuk layar untuk menanam bunga...</div>
+    </section>
+
+    <section id="game">
+        <div class="game-header">
+            <button class="btn-back-game" onclick="exitGame()">← Keluar</button>
+            <div class="score-container">
+                <div class="score-pill">SCORE: <span id="score">0</span></div>
+                <div class="score-pill">BEST: <span id="highScore">0</span></div>
+            </div>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+        <div id="gameOverScreen" class="game-over-modal">
+            <div class="modal-card">
+                <h2>Game Over! 💣</h2>
+                <p>Kamu berhasil mengumpulkan <br><strong><span id="finalScore">0</span> Poin</strong></p>
+                <div class="modal-btns">
+                    <button class="btn btn-blue" onclick="initFruitGame()">Main Lagi</button>
+                    <button class="btn btn-alt" onclick="exitGame()">Menu Utama</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="zen">
+        <button class="btn-back" onclick="showPage('home')">← Kembali</button>
+        <div class="instruction">Lukis ketenanganmu di sini</div>
+    </section>
+
+    <section id="heart">
+        <button class="btn-back" onclick="showPage('home')">← Kembali</button>
+        <div class="cat-message-container">
+            <div class="speech-bubble" id="bubble">
+                <p id="cat-text">Halo Princes! Kenalin...Aku Pet Virtual Yang Diciptain Khusus Buat Jadi Moodboostermu.</p>
+                <button id="wa-btn" class="btn btn-wa" onclick="sendWA()">The Special One 📱</button>
+            </div>
+            <div class="cat-character" onclick="nextMessage()">
+                <img src="img/kucing.png" alt="Kucing Lucu">
+            </div>
+        </div>
+        <div class="instruction-tap" id="tap-info">Ketuk kucingnya ya...</div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

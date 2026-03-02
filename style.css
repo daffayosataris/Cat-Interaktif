@@ -1,0 +1,54 @@
+:root {
+    --primary-cyan: #4db6ac;
+    --primary-blue: #64b5f6;
+    --primary-purple: #9575cd;
+    --accent-pink: #ff80ab;
+    --bg-gradient: linear-gradient(135deg, #e0f7fa 0%, #ffffff 50%, #f3e5f5 100%);
+    --card-white: rgba(255, 255, 255, 0.95);
+    --text-dark: #263238;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; touch-action: none; }
+
+body { background: var(--bg-gradient); color: var(--text-dark); overflow: hidden; height: 100vh; width: 100vw; }
+
+#mainCanvas, #gameCanvas { position: fixed; top: 0; left: 0; z-index: -1; }
+#gameCanvas { z-index: 5; pointer-events: auto; }
+
+section { display: none; height: 100vh; width: 100%; justify-content: center; align-items: center; flex-direction: column; position: relative; padding: 20px; }
+section.active { display: flex; animation: fadeIn 0.4s ease-out; }
+
+.glass-card { background: var(--card-white); border: 3px solid white; padding: 3rem 2rem; border-radius: 40px; text-align: center; width: 100%; max-width: 420px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); z-index: 10; }
+.title { color: #00796b; font-size: 1.8rem; margin-bottom: 10px; }
+.subtitle { font-size: 0.85rem; color: #546e7a; margin-bottom: 30px; line-height: 1.6; }
+.menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+.btn { padding: 16px; border: none; border-radius: 20px; font-weight: 600; font-size: 0.8rem; cursor: pointer; transition: 0.3s; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.btn-cyan { background: var(--primary-cyan); }
+.btn-blue { background: var(--primary-blue); }
+.btn-purple { background: var(--primary-purple); }
+.btn-special { background: var(--accent-pink); }
+.btn-alt { background: #eceff1; color: #78909c; }
+
+/* Tombol WhatsApp Khusus */
+.btn-wa { background: #25d366; width: 100%; margin-top: 15px; display: none; animation: popUp 0.5s ease; }
+
+.btn-back, .btn-back-game { position: absolute; top: 30px; left: 20px; background: white; color: var(--text-dark); border: none; padding: 12px 24px; border-radius: 50px; z-index: 1000; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.1); pointer-events: auto; }
+
+/* Fitur Kucing */
+.cat-message-container { position: relative; display: flex; flex-direction: column; align-items: center; z-index: 10; width: 100%; max-width: 350px; }
+.cat-character img { width: 220px; cursor: pointer; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); animation: catBounce 3s infinite ease-in-out; }
+.speech-bubble { background: white; padding: 25px; border-radius: 30px; border: 3px solid var(--primary-cyan); position: relative; margin-bottom: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: 0.3s; width: 100%; text-align: center; }
+.speech-bubble::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 15px solid var(--primary-cyan); }
+
+#cat-text { font-size: 1rem; color: var(--text-dark); line-height: 1.6; font-weight: 500; }
+.instruction-tap { position: absolute; bottom: 40px; font-size: 0.8rem; color: var(--primary-cyan); opacity: 0.6; font-style: italic; letter-spacing: 1px; }
+
+/* Modal Game Over */
+.game-over-modal { display: none; position: fixed; inset: 0; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); z-index: 2000; justify-content: center; align-items: center; }
+.modal-card { background: white; padding: 45px; border-radius: 40px; box-shadow: 0 25px 50px rgba(0,0,0,0.15); text-align: center; border: 3px solid var(--primary-blue); width: 85%; max-width: 350px; }
+
+@keyframes catBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+@keyframes popUp { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes bloomFloat { 0% { transform: scale(0) translateY(0); opacity: 0; } 20% { transform: scale(1.2) translateY(-20px); opacity: 1; } 100% { transform: scale(1) translateY(-120px); opacity: 0; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
