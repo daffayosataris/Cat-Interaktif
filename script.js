@@ -2,15 +2,13 @@ const mainCanvas = document.getElementById('mainCanvas');
 const mainCtx = mainCanvas.getContext('2d');
 let currentMode = 'home';
 
-// Audio Logic
+// Audio Logic (Opsional jika Baginda ingin memicu musik dari klik pertama)
 const bgMusic = document.getElementById('bgMusic');
 let isMusicPlaying = false;
 
 function playMusicOnce() {
-    if (!isMusicPlaying) {
-        bgMusic.play().catch(error => {
-            console.log("Autoplay dicegah, menunggu interaksi lebih lanjut.");
-        });
+    if (!isMusicPlaying && bgMusic) {
+        bgMusic.play().catch(error => console.log("Menunggu interaksi user..."));
         isMusicPlaying = true;
     }
 }
@@ -37,6 +35,7 @@ window.addEventListener('resize', initCanvas);
 initCanvas();
 
 function showPage(pageId) {
+    playMusicOnce();
     gameActive = false;
     cancelAnimationFrame(gameReq);
     clearTimeout(spawnTimer);
@@ -52,14 +51,14 @@ function showPage(pageId) {
     if(pageId === 'heart') {
         currentMsgIndex = -1;
         document.getElementById('wa-btn').style.display = 'none';
-        document.getElementById('cat-text').innerText = "Halo Princes! Kenalin...Aku Pet Virtual Yang Diciptain Khusus Buat Jadi Moodboostermu.";
+        document.getElementById('cat-text').innerText = "Halo Princes! Kenalin...Aku Pet Virtual Yang Diciptain Khusus Buat Jadi Moodboostermu, Klik Aku!";
         document.getElementById('tap-info').style.display = 'block';
     }
 }
 
 function exitGame() { showPage('home'); }
 
-// --- FITUR PESAN KUCING ---
+// --- FITUR PESAN KUCING (Urut) ---
 const catMessages = [
     "Haii, Tapi AKu Belum Punya Nama, Yang Nyiptain Aku Mau Kamu Yang Bantu Kasi Aku Nama!!",
     "Semoga Aku Bisa Jadi MooodBostermu Ya Cantik, Biar Kita Bisa Sering Ketemu Dan Berinteraksi",
@@ -101,10 +100,13 @@ function sendWA() {
     window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
 }
 
-// --- LOGIKA GARDEN ---
+// --- LOGIKA GARDEN (FIXED: Menggunakan Event Click) ---
 const flowers = ['🌸', '🌺', '🌷', '🌹', '🌼'];
-document.getElementById('garden-area').addEventListener('pointerdown', (e) => {
+const gardenArea = document.getElementById('garden-area');
+
+gardenArea.addEventListener('click', (e) => {
     if(currentMode !== 'garden') return;
+    
     const f = document.createElement('div');
     f.innerText = flowers[Math.floor(Math.random() * flowers.length)];
     f.style.position = 'fixed';
@@ -114,7 +116,9 @@ document.getElementById('garden-area').addEventListener('pointerdown', (e) => {
     f.style.pointerEvents = 'none';
     f.style.zIndex = '100';
     f.style.animation = 'bloomFloat 2s ease-out forwards';
+    
     document.getElementById('garden').appendChild(f);
+    
     setTimeout(() => f.remove(), 2000);
 });
 
